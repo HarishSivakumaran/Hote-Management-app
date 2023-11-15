@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import axios from 'axios';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-authentication',
@@ -6,6 +9,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./authentication.component.scss']
 })
 export class AuthenticationComponent {
+  credentials : any = {
+    "email": "",
+    "password": "",
+    "confirmPassword": ""
+  }
+
+  constructor(private authService: AuthenticationService) {
+
+  }
+
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
@@ -18,12 +31,14 @@ export class AuthenticationComponent {
       })
     });
 
-    document.getElementById("loginform")?.addEventListener("submit", this.onLogin);
-    document.getElementById("signupform")?.addEventListener("submit", this.onLogin);
-
   }
 
   onLogin(event: any) {
-    debugger;
+    if(!!this.credentials.confirmPassword) {
+      // sign up
+    } else {
+      //login
+      this.authService.login(this.credentials);
+    }
   }
 }

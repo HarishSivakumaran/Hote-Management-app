@@ -11,4 +11,16 @@ export class AuthenticationService {
     axios.defaults.headers.post["Content-Type"] = "application/json";
   }
 
+  getHealth() {
+   axios.get("/ping").then(v => alert(v));
+  }
+
+  login(creds: any) {
+    let payload = {
+      "login" : creds.email,
+      "password": creds.password
+    }
+    axios.post("/login", payload).then(data => console.log(data));
+  }
+
 }
