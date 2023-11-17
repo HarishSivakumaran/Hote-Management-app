@@ -1,12 +1,14 @@
 import { Injectable } from "@angular/core";
 import axios from 'axios'
+import { UserContext } from "./usercontext.service";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  constructor() {
+  constructor(private userContext: UserContext, private router:Router) {
     axios.defaults.baseURL = "http://localhost:8080";
     axios.defaults.headers.post["Content-Type"] = "application/json";
   }
@@ -16,11 +18,17 @@ export class AuthenticationService {
   }
 
   login(creds: any) {
-    let payload = {
-      "login" : creds.email,
-      "password": creds.password
-    }
-    axios.post("/login", payload).then(data => console.log(data));
+    axios.post("/login", creds).then(data => {
+      this.userContext.setUser(data.data);
+      this.router.navigate(['/','home']);
+      });
+  }
+
+  register(creds: any) {
+    axios.post("/register", creds).then(data => {
+      this.userContext.setUser(data.data);
+      this.router.navigate(['/','home']);
+      });
   }
 
 }

@@ -1,5 +1,6 @@
 package com.hotelmanagementwizard.hotelmanager.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,9 +11,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class UserDto {
-    private Long id;
-    private String firstName;
-    private String lastName;
-    private String login;
+    public Long id;
+    public String firstName;
+    public String lastName;
+    public String login;
+    @JsonIgnore
     private String password;
+    public String token;
 }

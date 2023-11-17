@@ -6,16 +6,23 @@
         Login
         <span class="underline"></span>
       </button>
-      <div class="form form-login">
+      <div [formGroup]="credentials" class="form form-login">
         <fieldset>
           <legend>Please, enter your email and password for login.</legend>
           <div class="input-block">
             <label for="login-email">E-mail</label>
-            <input [(ngModel)]="credentials.email" id="login-email" type="email" required>
+            <input formControlName="login" id="login-email" type="email" required>
+             <!-- Validation messages -->
+            <div class="invalid-feedback"  *ngIf="(!credentials.controls.login.pristine && credentials.controls.login.invalid)">
+              <div>Invalid email</div>
+            </div>
           </div>
           <div class="input-block">
             <label for="login-password">Password</label>
-            <input [(ngModel)]="credentials.password" id="login-password" type="password" required>
+            <input formControlName="password" id="login-password" type="password" required>
+            <div class="invalid-feedback"  *ngIf="(!credentials.controls.password.pristine && credentials.controls.password.invalid)">
+              <div>Passwords should have a minimum length of 7</div>
+            </div>
           </div>
         </fieldset>
         <button (click)="onLogin($event)" type="submits" class="btn-login">Login</button>
@@ -26,23 +33,42 @@
         Sign Up
         <span class="underline"></span>
       </button>
-      <div class="form form-signup">
+      <div [formGroup]="credentials" class="form form-signup">
         <fieldset>
           <legend>Please, enter your email, password and password confirmation for sign up.</legend>
           <div class="input-block">
+            <label for="signup-email">First name</label>
+            <input formControlName="firstName" id="signup-email" type="email">
+          </div>
+          <div class="input-block">
+            <label for="signup-email">Last name</label>
+            <input formControlName="lastName" id="signup-email" type="email">
+          </div>
+          <div class="input-block">
             <label for="signup-email">E-mail</label>
-            <input [(ngModel)]="credentials.email" id="signup-email" type="email" required>
+            <input formControlName="login" id="signup-email" type="email" required>
+             <!-- Validation messages -->
+             <div class="invalid-feedback"  *ngIf="(!credentials.controls.login.pristine && credentials.controls.login.invalid)">
+              <div>Invalid email</div>
+            </div>
           </div>
           <div class="input-block">
             <label for="signup-password">Password</label>
-            <input [(ngModel)]="credentials.password" id="signup-password" type="password" required>
+            <input formControlName="password" id="signup-password" type="password" required>
+            <div class="invalid-feedback"  *ngIf="(!credentials.controls.password.pristine && credentials.controls.password.invalid)">
+              <div>Passwords should have a minimum length of 7</div>
+            </div>
           </div>
           <div class="input-block">
             <label for="signup-password-confirm">Confirm password</label>
-            <input [(ngModel)]="credentials.confirmPassword"  id="signup-password-confirm" type="password" required>
+            <input formControlName="confirmPassword"  id="signup-password-confirm" type="password">
+            <div class="invalid-feedback"  *ngIf="(!credentials.controls.confirmPassword.pristine && credentials.controls.confirmPassword.invalid)">
+              <div>Passwords should have a minimum length of 7</div>
+            </div>
           </div>
         </fieldset>
-        <button type="submits" class="btn-signup">Continue</button>
+        <h5 style="color: red;">{{errorMessage}}</h5>
+        <button type="submits" (click)="onRegister()" class="btn-signup">Continue</button>
       </div>
     </div>
   </div>

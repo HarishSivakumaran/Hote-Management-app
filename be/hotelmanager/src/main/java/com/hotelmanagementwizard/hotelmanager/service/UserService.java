@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.nio.CharBuffer;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -30,5 +31,19 @@ public class UserService {
        }
 
        throw new AppException("Invalid username or password", HttpStatus.BAD_REQUEST);
+    }
+
+    public UserDto register(CredentialsDto credsDto) {
+        Optional<User> user = userRepository.findByLogin(credsDto.login());
+        if(user.isPresent()) {
+            throw new AppException("User already exists", HttpStatus.BAD_REQUEST);
+        }
+
+        User toBeSavedUser = userMapper.toEntity(credsDto);
+        toBeSavedUser.setPassword(passwordEncoder.encode(CharBuffer.wrap(credsDto.password())));
+
+        User save = userRepository.save(toBeSavedUser);
+        return userMapper.toDto(save);
+
     }
 }
