@@ -49,7 +49,7 @@ public class UserAuthProvider {
         UserDto user = UserDto.builder()
                 .login(decodedJWT.getIssuer())
                 .firstName(decodedJWT.getClaim("firstName").asString())
-                .firstName(decodedJWT.getClaim("lastName").asString())
+                .lastName(decodedJWT.getClaim("lastName").asString())
                 .build();
 
         return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());

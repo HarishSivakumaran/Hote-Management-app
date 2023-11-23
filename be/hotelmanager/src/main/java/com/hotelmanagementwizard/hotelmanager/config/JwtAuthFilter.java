@@ -27,7 +27,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                     SecurityContextHolder.getContext().setAuthentication(userAuthProvider.validateToken(headers[1]));
                 } catch (Exception e) {
                     SecurityContextHolder.clearContext();
-                    throw new AppException("Authentication failed !", HttpStatus.BAD_REQUEST);
+                    throw new AppException("Authentication failed !", HttpStatus.UNAUTHORIZED);
                 }
             }
         }

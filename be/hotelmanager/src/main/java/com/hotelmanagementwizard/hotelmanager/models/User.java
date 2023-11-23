@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -28,4 +31,8 @@ public class User {
 
     @Column(nullable = false)
     public String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    List<Hotel> hotels = new ArrayList<>();
+
 }

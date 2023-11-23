@@ -27,4 +27,8 @@ export class UserContext {
   isLoggedIn() {
     return !!localStorage.getItem("token");
   }
+
+  getToken(){
+    return localStorage.getItem("token");
+  }
 }
