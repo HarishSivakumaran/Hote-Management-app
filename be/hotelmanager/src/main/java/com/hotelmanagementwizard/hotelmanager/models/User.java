@@ -32,7 +32,7 @@ public class User {
     @Column(nullable = false)
     public String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     List<Hotel> hotels = new ArrayList<>();
 
 }

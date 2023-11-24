@@ -27,8 +27,8 @@ public class Hotel {
     public String description;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    public Long ownerId;
+    @JoinColumn(name = "owner_id", nullable = false)
+    public User owner;
 
     public String profileImage;
 

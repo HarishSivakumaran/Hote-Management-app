@@ -28,7 +28,7 @@ public class Room {
 
     @ManyToOne
     @JoinColumn(name = "hotel_id", nullable = false)
-    public Long hotelId;
+    public Hotel hotel;
 
     public List<String> images = new ArrayList();
 

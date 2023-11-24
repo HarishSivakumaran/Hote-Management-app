@@ -1,4 +1,10 @@
 package com.hotelmanagementwizard.hotelmanager.mapper;
 
-public class HotelMapper {
+import com.hotelmanagementwizard.hotelmanager.dto.HotelDto;
+import com.hotelmanagementwizard.hotelmanager.models.Hotel;
+import org.mapstruct.Mapper;
+
+@Mapper(componentModel = "spring")
+public interface HotelMapper {
+    HotelDto toDto(Hotel hotel);
 }
